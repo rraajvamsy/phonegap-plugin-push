@@ -22,7 +22,6 @@ module.exports = function(context) {
             googleIndex = contents.indexOf('google()', allprojectsIndex);
 
         if ((googleIndex < 0 || googleIndex > jcenterIndex) && jcenterIndex !== -1 && googleIndex !== -1) {
-            console.warn("inside the google block");
             contents = contents.slice(0, jcenterIndex) + "google()\n\t\t" + contents.slice(jcenterIndex);
             fs.writeFileSync(buildGradlePath, contents, 'utf8');
             console.log("Updated build.gradle with google repo as before to jcenter");
