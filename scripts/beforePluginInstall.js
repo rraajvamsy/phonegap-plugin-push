@@ -21,6 +21,10 @@ module.exports = function(context) {
             jcenterIndex = contents.indexOf('jcenter()', allprojectsIndex),
             googleIndex = contents.indexOf('google()', allprojectsIndex);
 
+            console.warn(allprojectsIndex);
+            console.warn(jcenterIndex);
+            console.warn(googleIndex);
+
         if (googleIndex < 0 || googleIndex > jcenterIndex) {
             contents = contents.slice(0, jcenterIndex) + "google()\n\t\t" + contents.slice(jcenterIndex);
             fs.writeFileSync(buildGradlePath, contents, 'utf8');
