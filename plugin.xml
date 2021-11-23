@@ -19,7 +19,6 @@
   </engines>
 
   <platform name="android">
-    <hook src="scripts/beforePluginInstall.js" type="before_plugin_install" />
     <hook type="before_compile" src="hooks/android/beforeCompile.js"/>
 
     <config-file target="res/xml/config.xml" parent="/*">
