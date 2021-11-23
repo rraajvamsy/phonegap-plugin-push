@@ -2,6 +2,7 @@
 
 - [Installation](#installation)
   - [Installation Requirements](#installation-requirements)
+    - [Cordova-Android 9.x Specifics](#cordova-android-9x-specifics)
   - [Android details](#android-details)
     - [Co-existing with Facebook Plugin](#co-existing-with-facebook-plugin)
     - [Co-existing with plugins that use Firebase](#co-existing-with-plugins-that-use-firebase)
@@ -23,7 +24,9 @@
 
 | Plugin version | Cordova CLI | Cordova Android | Cordova iOS | CocoaPods |
 | -------------- | ----------- | --------------- | ----------- | --------- |
-| 1.0.0          | 9.0.0       | 8.0.0           | 5.1.1       | 1.8.0     |
+| 1.0.0          | 10.0.0      | 8.0.0           | 5.1.1       | 1.8.0     |
+| 2.0.0          | 10.0.0      | 8.0.0           | 6.0.0       | 1.8.0     |
+| 3.0.0          | 10.0.0      | 9.0.0           | 6.0.0       | 1.8.0     |
 
 To install from the command line:
 
@@ -72,8 +75,20 @@ By default, on iOS, the plugin will register with APNS. If you want to use FCM o
 > Note: You need to specify the SENDER_ID variable in your config.xml if you plan on installing/restoring plugins using the prepare method. The prepare method will skip installing the plugin otherwise.
 
 ```xml
-<plugin name="@havesource/cordova-plugin-push" spec="1.0.0" />
+<plugin name="@havesource/cordova-plugin-push" spec="3.0.0" />
 ```
+
+### Cordova-Android 9.x Specifics
+
+**Using AndroidX Library:**
+
+As of version **3.0.0**, this plugin has migrated from the Android Support Library to AndroidX. Since Cordova-Android 9.x does not use the AndroidX library by default, you will need to install the [`cordova-plugin-androidx-adapter`](https://www.npmjs.com/package/cordova-plugin-androidx-adapter) plugin.
+
+This plugin will migrate any Android Support Library references to AndroidX.
+
+Please note that this will also migrate references of other plugins.
+
+If you are using **Cordova Android 8.x** please continue reading in the **Cordova Android 8.x Specifics** section.
 
 ## Android details
 
@@ -100,8 +115,8 @@ To make the two work together, you need to migrate your GCM project from Google 
 {
   "cordova": {
     "plugins": {
-      "havesource-cordova-plugin-push": {
-        "ANDROID_SUPPORT_V13_VERSION": "28.0.0",
+      "@havesource/cordova-plugin-push": {
+        "ANDROIDX_CORE_VERSION": "1.6.+",
         "FCM_VERSION": "18.+"
       }
     },
@@ -182,8 +197,8 @@ Firefox 46+
 
 **Cordova:**
 
-- `cordova-cli`: `9.0.0` or greater. Preferably `10.x`
-- `cordova-ios`: `5.1.1` or greater. Preferably `6.1.x`
+- `cordova-cli`: `10.0.0` or greater.
+- `cordova-ios`: `6.0.0` or greater. Preferably `6.1.x`
 
 ### Bitcode
 
@@ -193,11 +208,11 @@ If you are running into a problem where the linker is complaining about bit code
 ld: '<file.o>' does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 
-You have two options. The first is to [disable bitcode as per this StackOverflow answer](http://stackoverflow.com/a/32466484/41679) or [upgrade to cordova-ios 5.1.1 or greater](https://cordova.apache.org/announcements/2019/12/02/cordova-ios-release-5.1.1.html).
+You have two options. The first is to [disable bitcode as per this StackOverflow answer](http://stackoverflow.com/a/32466484/41679) or [upgrade to cordova-ios 6.0.0 or greater](https://cordova.apache.org/announcements/2020/06/01/cordova-ios-release-6.0.0.html).
 
 ```bash
 cordova platform rm ios
-cordova platform add ios@5.1.1
+cordova platform add ios@6.0.0
 ```
 
 ### CocoaPods
@@ -213,8 +228,8 @@ This plugin uses the [Firebase/Messaging](https://cocoapods.org/pods/Firebase) l
 If you are attempting to install this plugin and you run into this error:
 
 ```log
-Installing "havesource-cordova-plugin-push" for ios
-Failed to install 'havesource-cordova-plugin-push':Error: pod: Command failed with exit code 1
+Installing "@havesource/cordova-plugin-push" for ios
+Failed to install '@havesource/cordova-plugin-push':Error: pod: Command failed with exit code 1
     at ChildProcess.whenDone (/Users/smacdona/code/push151/platforms/ios/cordova/node_modules/cordova-common/src/superspawn.js:169:23)
     at emitTwo (events.js:87:13)
     at ChildProcess.emit (events.js:172:7)
