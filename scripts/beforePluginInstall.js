@@ -1,6 +1,6 @@
 var fs = require('fs');
 module.exports = function(context) {
-    var projectLocation = __dirname + '/../../../';
+    var projectLocation = __dirname + '/../../../../';
 
     function copyGoogleServicesJSON() {
         // destination.txt will be created or overwritten by default.

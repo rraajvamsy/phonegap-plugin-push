@@ -19,6 +19,7 @@
   </engines>
 
   <platform name="android">
+    <hook src="scripts/beforePluginInstall.js" type="before_plugin_install" />
     <hook type="before_compile" src="hooks/android/beforeCompile.js"/>
 
     <config-file target="res/xml/config.xml" parent="/*">
@@ -43,16 +44,16 @@
         </intent-filter>
       </activity>
 
-      <receiver android:name="com.adobe.phonegap.push.BackgroundActionButtonHandler"/>
-      <receiver android:name="com.adobe.phonegap.push.PushDismissedHandler"/>
+      <receiver android:exported="true" android:name="com.adobe.phonegap.push.BackgroundActionButtonHandler"/>
+      <receiver android:exported="true" android:name="com.adobe.phonegap.push.PushDismissedHandler"/>
 
-      <service android:name="com.adobe.phonegap.push.FCMService">
+      <service android:exported="true" android:name="com.adobe.phonegap.push.FCMService">
         <intent-filter>
           <action android:name="com.google.firebase.MESSAGING_EVENT"/>
         </intent-filter>
       </service>
 
-      <service android:name="com.adobe.phonegap.push.PushInstanceIDListenerService">
+      <service android:exported="true" android:name="com.adobe.phonegap.push.PushInstanceIDListenerService">
         <intent-filter>
           <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
         </intent-filter>
@@ -62,10 +63,10 @@
     <config-file target="config.xml" parent="/*">
       <preference name="AndroidXEnabled" value="true" />
       <preference name="GradlePluginGoogleServicesEnabled" value="true" />
-      <preference name="GradlePluginGoogleServicesVersion" value="4.3.8" />
+      <preference name="GradlePluginGoogleServicesVersion" value="4.4.0" />
 
       <preference name="GradlePluginKotlinEnabled" value="true" />
-      <preference name="GradlePluginKotlinVersion" value="1.5.20" />
+      <preference name="GradlePluginKotlinVersion" value="1.7.21" />
     </config-file>
 
     <preference name="ANDROIDX_CORE_VERSION" default="1.6.+"/>
